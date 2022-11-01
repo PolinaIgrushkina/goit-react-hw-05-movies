@@ -17,6 +17,22 @@ export const fetchFilmDetails = async (movie_id) => {
   return response.data;
 };
 
+export const fetcActors = async (movie_id) => {
+  const response = await api.get(`/movie/${movie_id}/credits`)
+  return response.data.cast;
+};
 
+export const fetchReviews = async (movie_id) => {
+  const response = await api.get(`/movie/${movie_id}/reviews`)
+  return response.data.results;
+};
 
-
+export const fetchFindFilms = async (searchWord) => {
+  const response = await api.get(`/search/movie`, {
+    params: {
+      query: searchWord,
+    }
+  })
+  console.log(response.data);
+  return response.data;
+};

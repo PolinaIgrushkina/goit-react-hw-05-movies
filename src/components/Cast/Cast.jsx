@@ -1,5 +1,31 @@
-import React from 'react';
+import { fetcActors } from 'helpers/api';
+import { createImg } from 'helpers/createImg';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function Cast() {
-  return <div>Cast</div>;
+  const { movieId } = useParams();
+  const [actors, setActors] = useState();
+
+  useEffect(() => {
+    async function getCast() {
+      const actorsData = await fetcActors(movieId);
+      setActors(actorsData);
+    }
+    getCast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <ul>
+      {actors?.map(actor => (
+        <li key={actor.id}>
+          <img src={createImg(actor.profile_path)} alt="actor" width="200px" />
+          <p>Name: {actor.original_name}</p>
+          <p>Character: {actor.character}</p>
+        </li>
+      ))}
+    </ul>
+  );
 }

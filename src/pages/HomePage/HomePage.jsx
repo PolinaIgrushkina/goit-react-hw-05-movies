@@ -21,7 +21,7 @@ export default function HomePage() {
         {trendingFilms.map(film => {
           return (
             <li key={film.id}>
-              <Link to="/movies/:movieId">{film.original_title}</Link>
+              <Link to={`/movies/${film.id}`}>{film.original_title}</Link>
             </li>
           );
         })}

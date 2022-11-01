@@ -9,8 +9,12 @@ const api = axios.create({
 
 export const fetchTrendingFilms = async () => {
   const response = await api.get('/trending/movie/week')
-  console.log(response.data.results);
   return response.data.results;
+};
+
+export const fetchFilmDetails = async (movie_id) => {
+  const response = await api.get(`/movie/${movie_id}`)
+  return response.data;
 };
 
 

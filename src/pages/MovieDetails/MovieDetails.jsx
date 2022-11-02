@@ -1,12 +1,14 @@
 import { fetchFilmDetails } from 'helpers/api';
 import { createImg } from 'helpers/createImg';
 import React from 'react';
+import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 export default function MovieDetails() {
   const [film, setFilm] = useState({});
   const { movieId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     async function getDetails() {
@@ -20,7 +22,7 @@ export default function MovieDetails() {
   const { poster_path, release_date, vote_average, overview, genres } = film;
   return (
     <div>
-      <Link to="/movies">Go back</Link>
+      <Link to={location.state?.from ?? '/movies'}>Go back</Link>
       <div>
         <img src={createImg(poster_path)} alt="Film avatar" />
         <h2>
@@ -50,7 +52,9 @@ export default function MovieDetails() {
         </ul>
       </div>
 
-      <Outlet />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }

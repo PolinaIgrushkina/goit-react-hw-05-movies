@@ -1,6 +1,6 @@
 import { fetchFindFilms } from 'helpers/api';
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 // import { omitBy } from 'lodash';
 
 export default function MoviesPage() {
@@ -12,6 +12,8 @@ export default function MoviesPage() {
   const [searchWord, setSearchWord] = useState(query ?? '');
   const [findingFilms, setFindingFilms] = useState([]);
   const [filmsData, setFilmsData] = useState([]);
+
+  const location = useLocation();
 
   useEffect(() => {
     if (query === '') {
@@ -47,7 +49,6 @@ export default function MoviesPage() {
     setSearchParams({ query: searchWord.trim().toLowerCase(), page: newPage });
   };
 
-  console.log(findingFilms);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -57,26 +58,29 @@ export default function MoviesPage() {
       <ul>
         {findingFilms.map(findingFilm => (
           <li key={findingFilm.id}>
-            <Link to={`/movies/${findingFilm.id}`}>
+            <Link to={`/movies/${findingFilm.id}`} state={{ from: location }}>
               {findingFilm.original_title}
             </Link>
           </li>
         ))}
       </ul>
-      <div>
-        <ul>
-          {[...Array(filmsData?.total_pages)].map((_, index) => (
-            <li key={index}>
-              <button
-                disabled={index + 1 === filmsData?.page}
-                onClick={() => handleChangePage(index + 1)}
-              >
-                {index + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      {filmsData?.total_pages && (
+        <div>
+          <ul>
+            {[...Array(filmsData?.total_pages)].map((_, index) => (
+              <li key={index}>
+                <button
+                  disabled={index + 1 === filmsData?.page}
+                  onClick={() => handleChangePage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 }

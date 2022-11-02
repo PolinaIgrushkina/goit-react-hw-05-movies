@@ -1,0 +1,51 @@
+.goBack {
+  display: block;
+
+  width: 80px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: rgb(180, 180, 227, 0.4);
+  color: rgb(22, 30, 107);
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.goBack:hover,
+.goBack:focus {
+  color: rgb(208, 43, 226);
+  text-decoration: underline;
+}
+
+.movie_container {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.movie_title {
+  color: rgb(22, 22, 198);
+}
+
+.movie_additionalList {
+  display: flex;
+  list-style-type: none;
+}
+
+.movie_additionalItem {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: medium;
+  margin-right: 20px;
+}
+
+.movie_additionalItem:hover,
+.movie_additionalItem:focus {
+  text-decoration: underline;
+}

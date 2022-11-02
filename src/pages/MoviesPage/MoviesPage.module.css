@@ -49,15 +49,19 @@
 
 .movies_buttonList {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
   list-style-type: none;
   padding-left: 0;
+  margin-right: 40px;
+
 }
 
 .movies_buttonItem {
   background-color: rgb(180, 180, 227, 0.4);
   border: 1px solid #ced4da;
   border-radius: 4px;
-  margin-left: 5px;
   width: 30px;
   height: 30px;
 }

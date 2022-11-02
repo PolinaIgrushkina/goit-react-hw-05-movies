@@ -1,0 +1,10 @@
+.cast_list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cast_item {
+  max-width: 200px;
+}

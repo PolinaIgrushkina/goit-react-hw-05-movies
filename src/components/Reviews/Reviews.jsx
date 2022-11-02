@@ -1,6 +1,7 @@
 import { fetchReviews } from 'helpers/api';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import css from './Reviews.module.css';
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -19,7 +20,7 @@ export default function Reviews() {
     return 'We do not have any reviews for this movie.';
   }
   return (
-    <ul>
+    <ul className={css.reviews_list}>
       {reviews?.map(review => (
         <li key={review.id}>
           <h3>Author: {review.author}</h3>

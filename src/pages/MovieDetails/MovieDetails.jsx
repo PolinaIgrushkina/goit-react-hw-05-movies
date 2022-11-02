@@ -4,6 +4,7 @@ import React from 'react';
 import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import css from './MovieDetails.module.css';
 
 export default function MovieDetails() {
   const [film, setFilm] = useState({});
@@ -21,10 +22,12 @@ export default function MovieDetails() {
 
   const { poster_path, release_date, vote_average, overview, genres } = film;
   return (
-    <div>
-      <Link to={location.state?.from ?? '/movies'}>Go back</Link>
+    <div className={css.movie_container}>
+      <Link to={location.state?.from ?? '/movies'} className={css.goBack}>
+        Go back
+      </Link>
       <div>
-        <img src={createImg(poster_path)} alt="Film avatar" />
+        <img src={createImg(poster_path)} alt="Film avatar" width="300px" />
         <h2>
           {film.title} ({release_date?.slice(0, 4)})
         </h2>
@@ -40,14 +43,24 @@ export default function MovieDetails() {
       </div>
 
       <div>
-        <h3>Additional information</h3>
+        <h3 className={css.movie_title}>Additional information</h3>
 
-        <ul>
+        <ul className={css.movie_additionalList}>
           <li>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+            <Link
+              to={`/movies/${movieId}/cast`}
+              className={css.movie_additionalItem}
+            >
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+            <Link
+              to={`/movies/${movieId}/reviews`}
+              className={css.movie_additionalItem}
+            >
+              Reviews
+            </Link>
           </li>
         </ul>
       </div>

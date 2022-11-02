@@ -1,6 +1,7 @@
 import { fetchFindFilms } from 'helpers/api';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import css from './MoviesPage.module.css';
 // import { omitBy } from 'lodash';
 
 export default function MoviesPage() {
@@ -50,15 +51,26 @@ export default function MoviesPage() {
   };
 
   return (
-    <>
+    <div className={css.movies_container}>
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} value={searchWord} />
-        <button type="submit">Search</button>
+        <input
+          type="text"
+          onChange={handleChange}
+          value={searchWord}
+          className={css.movies_input}
+        />
+        <button type="submit" className={css.movies_button}>
+          Search
+        </button>
       </form>
-      <ul>
+      <ul className={css.movies_list}>
         {findingFilms.map(findingFilm => (
-          <li key={findingFilm.id}>
-            <Link to={`/movies/${findingFilm.id}`} state={{ from: location }}>
+          <li key={findingFilm.id} className={css.movies_listItem}>
+            <Link
+              to={`/movies/${findingFilm.id}`}
+              state={{ from: location }}
+              className={css.movies_link}
+            >
               {findingFilm.original_title}
             </Link>
           </li>
@@ -67,12 +79,13 @@ export default function MoviesPage() {
 
       {filmsData?.total_pages && (
         <div>
-          <ul>
+          <ul className={css.movies_buttonList}>
             {[...Array(filmsData?.total_pages)].map((_, index) => (
               <li key={index}>
                 <button
                   disabled={index + 1 === filmsData?.page}
                   onClick={() => handleChangePage(index + 1)}
+                  className={css.movies_buttonItem}
                 >
                   {index + 1}
                 </button>
@@ -81,6 +94,6 @@ export default function MoviesPage() {
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 }

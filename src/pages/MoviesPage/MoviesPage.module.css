@@ -1,0 +1,67 @@
+.movies_container {
+  padding-left: 40px;
+}
+
+.movies_input {
+    display: inline-block;
+    width: 30%;
+    height: 30px;
+    font: inherit;
+    font-size: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.movies_button {
+  height: 30px;
+  font-size: 20px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid #ced4da;
+  color: rgb(22, 30, 107);
+  border-radius: 4px;
+  margin-left: 10px;
+  background-color: rgb(180, 180, 227, 0.4);
+}
+
+.movies_list {
+  list-style-type: circle;
+  padding-left: 20px;
+  text-decoration: none;
+}
+
+.movies_listItem {
+  margin-bottom: 5px;
+}
+
+.movies_link {
+  color: rgb(22, 30, 107);
+  text-decoration: none;
+}
+
+.movies_link:hover,
+.movies_link:focus {
+  color: rgb(208, 43, 226);
+  text-decoration: underline;
+}
+
+.movies_buttonList {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.movies_buttonItem {
+  background-color: rgb(180, 180, 227, 0.4);
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.movies_buttonItem:hover {
+  background-color: rgba(227, 180, 215, 0.4);
+}

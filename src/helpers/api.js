@@ -27,10 +27,11 @@ export const fetchReviews = async (movie_id) => {
   return response.data.results;
 };
 
-export const fetchFindFilms = async (searchWord) => {
+export const fetchFindFilms = async (query, page) => {
   const response = await api.get(`/search/movie`, {
     params: {
-      query: searchWord,
+      query,
+      page,
     }
   })
   console.log(response.data);

@@ -1,22 +1,31 @@
 import { fetchFindFilms } from 'helpers/api';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+// import { omitBy } from 'lodash';
 
 export default function MoviesPage() {
-  const [searchWord, setSearchWord] = useState('');
-  const [findingFilms, setFindingFilms] = useState([]);
-
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query');
+
+  const page = searchParams.get('page') ?? 1;
+  const query = searchParams.get('query') ?? '';
+
+  const [searchWord, setSearchWord] = useState(query ?? '');
+  const [findingFilms, setFindingFilms] = useState([]);
+  const [filmsData, setFilmsData] = useState([]);
 
   useEffect(() => {
+    if (query === '') {
+      return;
+    }
+
     async function getFindFilms() {
-      const films = await fetchFindFilms(query);
+      const films = await fetchFindFilms(query, page);
+      // (omitBy({ query, page }, item => !item));
       setFindingFilms(films.results);
+      setFilmsData(films);
     }
     getFindFilms();
-  }, [query, searchWord]);
+  }, [query, page]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -25,27 +34,49 @@ export default function MoviesPage() {
       alert('Please write what you need.');
       return;
     }
-    setSearchParams({ query: searchWord });
+
+    setSearchParams({ query: searchWord.trim().toLowerCase(), page: 1 });
+    // (omitBy({ query: searchWord.trim().toLowerCase(), page: 1 }, item => !item;}));
   };
 
   const handleChange = event => {
-    setSearchWord(event.currentTarget.value.toLowerCase());
+    setSearchWord(event.currentTarget.value);
   };
 
+  const handleChangePage = newPage => {
+    setSearchParams({ query: searchWord.trim().toLowerCase(), page: newPage });
+  };
+
+  console.log(findingFilms);
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} />
+        <input type="text" onChange={handleChange} value={searchWord} />
         <button type="submit">Search</button>
       </form>
-
       <ul>
-        {findingFilms?.map(findingFilm => (
+        {findingFilms.map(findingFilm => (
           <li key={findingFilm.id}>
-            <Link to="">{findingFilm.original_title}</Link>
+            <Link to={`/movies/${findingFilm.id}`}>
+              {findingFilm.original_title}
+            </Link>
           </li>
         ))}
       </ul>
+      <div>
+        <ul>
+          {[...Array(filmsData?.total_pages)].map((_, index) => (
+            <li key={index}>
+              <button
+                disabled={index + 1 === filmsData?.page}
+                onClick={() => handleChangePage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

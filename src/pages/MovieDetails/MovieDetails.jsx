@@ -23,7 +23,7 @@ export default function MovieDetails() {
   const { poster_path, release_date, vote_average, overview, genres } = film;
   return (
     <div className={css.movie_container}>
-      <Link to={location.state?.from ?? '/movies'} className={css.goBack}>
+      <Link to={location.state?.from ?? '/'} className={css.goBack}>
         Go back
       </Link>
       <div>
@@ -48,6 +48,7 @@ export default function MovieDetails() {
         <ul className={css.movie_additionalList}>
           <li>
             <Link
+              state={{ from: location?.state?.from }}
               to={`/movies/${movieId}/cast`}
               className={css.movie_additionalItem}
             >
@@ -56,6 +57,7 @@ export default function MovieDetails() {
           </li>
           <li>
             <Link
+              state={{ from: location?.state?.from }}
               to={`/movies/${movieId}/reviews`}
               className={css.movie_additionalItem}
             >

@@ -16,6 +16,11 @@
   margin-right: 30px;
 }
 
+.active {
+  color: rgb(208, 43, 226);
+  text-decoration: underline;
+}
+
 .navigation__item:hover,
 .navigation__item:focus {
   color: rgb(208, 43, 226);

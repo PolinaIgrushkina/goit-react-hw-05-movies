@@ -7,12 +7,26 @@ export default function Layout({ children }) {
     <>
       <ul className={css.navigation}>
         <li>
-          <NavLink to="/" className={css.navigation__item}>
+          <NavLink
+            to="/"
+            end
+            // className={({ isActive }) =>
+            //   isActive ? css.active : css.navigation__item
+            // }
+            className={({ isActive }) =>
+              `${css.navigation__item} ${isActive ? css.active : ''}`
+            }
+          >
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/movies" className={css.navigation__item}>
+          <NavLink
+            to="/movies"
+            className={({ isActive }) =>
+              `${css.navigation__item} ${isActive ? css.active : ''}`
+            }
+          >
             Movies
           </NavLink>
         </li>

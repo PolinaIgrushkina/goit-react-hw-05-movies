@@ -22,7 +22,12 @@ export default function Cast() {
     <ul className={css.cast_list}>
       {actors?.map(actor => (
         <li key={actor.id} className={css.cast_item}>
-          <img src={createImg(actor.profile_path)} alt="actor" width="200px" />
+          <img
+            src={createImg(actor.profile_path)}
+            alt="actor"
+            width="200px"
+            height="300px"
+          />
           <p>Name: {actor.original_name}</p>
           <p>Character: {actor.character}</p>
         </li>
